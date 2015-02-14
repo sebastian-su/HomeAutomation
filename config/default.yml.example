@@ -1,0 +1,6 @@
+### test configuration
+
+path: /test/ 
+ain:
+  - 12345
+  - 34567
