@@ -27,21 +27,23 @@ describe House do
       end
     end
 
-    describe "#switch_all_on_daytime" do
-      it "switches all on if its daytime" do
-        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,13,0,0)
+    describe "#switch_all_on_at_night" do
+      it "switches all on if its night" do
+        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,22,0,0)
         Time.stub(:now).and_return(@time_now)
-        @house.switch_all_on_daytime
+        @house.switch_all_off
+        @house.switch_all_on_at_night
         expect(@house.switches[0].status).to eq true
         expect(@house.switches[1].status).to eq true
       end
 
-      it "does not switch if its not daytime" do
-        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,22,0,0)
+      it "does not switch if its daytime" do
+        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,12,0,0)
         Time.stub(:now).and_return(@time_now)
-        old_status = @house.switches[0].status
-        @house.switch_all_on_daytime
-        expect(@house.switches[0].status).to eq old_status
+        @house.switch_all_off
+        expect(@house.switches[0].status).to eq false
+        @house.switch_all_on_at_night
+        expect(@house.switches[0].status).to eq false
       end
     end
 

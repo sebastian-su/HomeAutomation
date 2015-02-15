@@ -24,7 +24,7 @@ class House
     end
   end
 
-  def switch_all_on_daytime
+  def switch_all_on_at_night
     if !daytime?
       @switches.each do |switch|
         switch.switch_on
