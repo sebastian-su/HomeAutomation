@@ -1,6 +1,6 @@
 ### test configuration
 
-path: /test/ 
+path: /test/
 ain:
   - 12345
   - 34567

@@ -1,20 +1,20 @@
 require 'open-uri'
-require_relative 'fritzclient.rb'
+require 'nokogiri'
 
 class Switch
+
+  attr_reader :status
 
   def initialize(id)
     @id = id
     @status = true
-    @hostname = "fritz.box"
-    @passwort = ""
-    @client = FritzClient.new(@hostname, @passwort, false)
+    @@sid = Nokogiri::XML(open("http://fritz.box/login_sid.lua")).at_xpath('//SID/text()').to_s
   end
 
   def switch_on
     if @status == false
       puts "#{Time.now} - enable Switch: #{@id}"
-      @client.enable_fritz_dect(@id)
+      open("http://fritz.box/webservices/homeautoswitch.lua?sid=#{@@sid}&ain=#{@id}&switchcmd=setswitchon")
       @status = true
     end
   end
@@ -22,7 +22,7 @@ class Switch
   def switch_off
     if @status == true
       puts "#{Time.now} - disable Switch: #{@id}"
-      @client.disable_fritz_dect(@id)
+      open("http://fritz.box/webservices/homeautoswitch.lua?sid=#{@@sid}&ain=#{@id}&switchcmd=setswitchoff")
       @status = false
     end
   end
