@@ -3,6 +3,8 @@ require_relative 'switch.rb'
 
 class House
 
+  attr_reader :switches
+
   def initialize(ain)
     @switches = []
     ain.each do |ain|
