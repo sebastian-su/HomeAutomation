@@ -18,6 +18,7 @@ GEM
     multi_json (1.10.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    rake (10.4.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -53,6 +54,7 @@ PLATFORMS
 DEPENDENCIES
   listen
   nokogiri
+  rake
   rspec
   ruby-sun-times
   simplecov
