@@ -10,13 +10,13 @@ class HomeAutomation
   @folder = @config['path']
   @activity = false
 
-  Thread.new {
-    listener = Listen.to(@folder) do
-      @activity=true
-    end
-    listener.start
-    sleep
-  }
+  #Thread.new {
+  #  listener = Listen.to(@folder) do
+  #    @activity=true
+  #  end
+  #  listener.start
+  #  sleep
+  #}
 
   while true do
     if @activity==true
