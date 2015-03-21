@@ -35,6 +35,12 @@ RSpec.configure do |config|
     stub_request(:get, "http://fritz.box/webservices/homeautoswitch.lua?ain=123&sid=&switchcmd=setswitchon").
       with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
       to_return(:status => 200, :body => "", :headers => {})
+    stub_request(:get, "http://fritz.box/webservices/homeautoswitch.lua?ain=123&sid=&switchcmd=getswitchname").
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => "switchname", :headers => {})
+    stub_request(:get, "http://fritz.box/webservices/homeautoswitch.lua?sid=&switchcmd=getswitchlist").
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => "123,123", :headers => {})
   end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

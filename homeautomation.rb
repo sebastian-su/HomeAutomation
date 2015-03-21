@@ -6,7 +6,7 @@ require_relative 'house.rb'
 class HomeAutomation
   @current_dir = File.expand_path File.dirname(__FILE__)
   @config = YAML.load(File.open("#{@current_dir}/config/default.yml"))
-  @house = House.new(@config['ain'])
+  @house = House.new
   @folder = @config['path']
   @activity = false
 

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe House do
   before :each do
-    @house = House.new([123,123])
+    @house = House.new
     end
 
     describe "#initial settings" do

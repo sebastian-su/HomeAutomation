@@ -1,13 +1,17 @@
 require 'sun_times'
+require 'open-uri'
+require 'nokogiri'
 require_relative 'switch.rb'
 
 class House
 
   attr_reader :switches
 
-  def initialize(ain)
+  def initialize()
+    @sid = Nokogiri::XML(open("http://fritz.box/login_sid.lua")).at_xpath('//SID/text()').to_s
+    ains = open("http://fritz.box/webservices/homeautoswitch.lua?sid=#{@sid}&switchcmd=getswitchlist").read.strip.split(",")
     @switches = []
-    ain.each do |ain|
+    ains.each do |ain|
       @switches.push(Switch.new(ain))
     end
     @sun_times = SunTimes.new
