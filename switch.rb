@@ -16,18 +16,14 @@ class Switch
   end
 
   def switch_on
-    if @status == false
-      @logger.info("enable Switch: #{@name}")
-      open("http://fritz.box/webservices/homeautoswitch.lua?sid=#{@@sid}&ain=#{@id}&switchcmd=setswitchon")
-      @status = true
-    end
+    @logger.info("enable Switch: #{@name}")
+    open("http://fritz.box/webservices/homeautoswitch.lua?sid=#{@@sid}&ain=#{@id}&switchcmd=setswitchon")
+    @status = true
   end
 
   def switch_off
-    if @status == true
-      @logger.info("disable Switch: #{@name}")
-      open("http://fritz.box/webservices/homeautoswitch.lua?sid=#{@@sid}&ain=#{@id}&switchcmd=setswitchoff")
-      @status = false
-    end
+    @logger.info("disable Switch: #{@name}")
+    open("http://fritz.box/webservices/homeautoswitch.lua?sid=#{@@sid}&ain=#{@id}&switchcmd=setswitchoff")
+    @status = false
   end
 end
