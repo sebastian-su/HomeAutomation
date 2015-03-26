@@ -34,5 +34,3 @@ build/
 .rvmrc
 
 test/*
-
-config/default.yml
