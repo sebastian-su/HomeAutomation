@@ -19,13 +19,8 @@ class HomeAutomation
   #}
 
   while true do
-    if @activity==true
-      @house.switch_all_on_at_night
-      @activity=false
-      sleep 120
-    else
-      @house.switch_all_off
-      sleep 1
-    end
+    @house.switch_all_on
+    @house.switch_all_off
+    sleep 10
   end
 end
