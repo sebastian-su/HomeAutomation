@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Switch do
   before :each do
+    config = {"log_path"=>"ha.log",
+              "path"=>"test/",
+              "switches"=>{"123"=>{"on_time"=>"16:00", "off_time"=>"22:00", "nightly"=>false},
+                            "456"=>{"on_time"=>"18:00", "off_time"=>"23:55", "nightly"=>true}}}
+    YAML.stub(:load_file).and_return(config)
     @switch = Switch.new(123)
     end
     

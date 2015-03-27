@@ -15,7 +15,7 @@ class Switch
     ### Fitzbox data
     @@sid = Nokogiri::XML(open("http://fritz.box/login_sid.lua")).at_xpath('//SID/text()').to_s
     @name = open("http://fritz.box/webservices/homeautoswitch.lua?sid=#{@@sid}&ain=#{@id}&switchcmd=getswitchname").read
-    @config = YAML.load(File.open("#{File.expand_path File.dirname(__FILE__)}/config/default.yml"))
+    @config = YAML.load_file("config/default.yml")
     @on_time = Time.parse(@config['switches']["#{@id}"]['on_time'])
     @off_time = Time.parse(@config['switches']["#{@id}"]['off_time'])
     @nightly = @config['switches']["#{@id}"]['nightly']

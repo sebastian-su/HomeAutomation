@@ -20,6 +20,7 @@ class HomeAutomation
 
   while true do
     @house.switch_all_on
+    sleep 10
     @house.switch_all_off
     sleep 10
   end
