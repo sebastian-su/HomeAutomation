@@ -19,26 +19,26 @@ class House
     @longitude = 13.55
     @sunrise = @sun_times.rise(Date.today, @latitude, @longitude).localtime
     @sunset =  @sun_times.set(Date.today, @latitude, @longitude).localtime
-    @global_turn_off = Time.new(Date.today.year,Date.today.month,Date.today.day,22,0,0)
+    @global_turn_off = Time.new(Date.today.year,Date.today.month,Date.today.day,23,0,0)
   end
 
   def switch_all_on
     @switches.each do |switch|
-      switch.switch_on
+      switch.switch_on_by_time
     end
   end
 
   def switch_all_on_at_night
     if !daytime?
       @switches.each do |switch|
-        switch.switch_on
+        switch.switch_on_by_time
       end
     end
   end
 
   def switch_all_off
     @switches.each do |switch|
-      switch.switch_off
+      switch.switch_off_by_time
     end
   end
 

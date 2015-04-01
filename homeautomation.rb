@@ -23,5 +23,7 @@ class HomeAutomation
     sleep 10
     @house.switch_all_off
     sleep 10
+    @house.global_turn_off
+    sleep 10
   end
 end

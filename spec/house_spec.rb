@@ -5,7 +5,7 @@ describe House do
     config = {"log_path"=>"ha.log",
               "path"=>"test/",
               "switches"=>{"123"=>{"on_time"=>"16:00", "off_time"=>"22:00", "nightly"=>false},
-                           "456"=>{"on_time"=>"18:00", "off_time"=>"23:55", "nightly"=>true}}}
+                           "456"=>{"on_time"=>"18:00", "off_time"=>"22:00", "nightly"=>true}}}
     YAML.stub(:load_file).and_return(config)
     @house = House.new
     end
@@ -18,6 +18,9 @@ describe House do
 
     describe "#switch_all_on" do
       it "returns true for switched on switches" do
+        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,19,05,00)
+        Time.stub(:now).and_return(@time_now)
+        @house.switch_all_off
         @house.switch_all_on
         expect(@house.switches[0].status).to eq true
         expect(@house.switches[1].status).to eq true
@@ -26,6 +29,8 @@ describe House do
 
     describe "#switch_all_off" do
       it "returns false for switched off switches" do
+        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,22,05,00)
+        Time.stub(:now).and_return(@time_now)
         @house.switch_all_off
         expect(@house.switches[0].status).to eq false
         expect(@house.switches[1].status).to eq false
@@ -43,12 +48,14 @@ describe House do
       end
 
       it "does not switch if its daytime" do
-        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,12,0,0)
+        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,23,0,0)
         Time.stub(:now).and_return(@time_now)
         @house.switch_all_off
-        expect(@house.switches[0].status).to eq false
+        expect(@house.switches[1].status).to eq false
+        @time_now = Time.new(Date.today.year,Date.today.month,Date.today.day,12,0,0)
+        Time.stub(:now).and_return(@time_now)
         @house.switch_all_on_at_night
-        expect(@house.switches[0].status).to eq false
+        expect(@house.switches[1].status).to eq false
       end
     end
 

@@ -5,13 +5,13 @@ describe Switch do
     config = {"log_path"=>"ha.log",
               "path"=>"test/",
               "switches"=>{"123"=>{"on_time"=>"16:00", "off_time"=>"22:00", "nightly"=>false},
-                            "456"=>{"on_time"=>"18:00", "off_time"=>"23:55", "nightly"=>true}}}
+                           "456"=>{"on_time"=>"18:00", "off_time"=>"23:55", "nightly"=>true}}}
     YAML.stub(:load_file).and_return(config)
     @switch = Switch.new(123)
     end
     
     describe "#initial settings" do
-      it "switch should default to true" do
+      it "switch should get switch status from fritzbox" do
         expect(@switch.status).to eq true
       end
     end
